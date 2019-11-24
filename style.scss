@@ -1,0 +1,670 @@
+$body-bg:#f4f4f4;
+$primary-color:#2196f3;
+$config-bg:#e4f2fd;
+$connect-bg:rgba(255, 160, 0, 0.15);
+$cancel-bg:#f1f1f1;
+$cancel-text:rgba(0, 0, 0, 0.32);
+$save-text:#fff;
+$dropCard:#dfdfdf;
+
+$h1-size:26px;
+$h2-size:18px;
+$btns-size:20px;
+$config-size:16px;
+$config-weight:500;
+
+
+
+h2 {
+    padding-bottom: 8px;
+    font-size: $h2-size;
+    font-weight: $config-weight;
+}
+
+@mixin flexCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+
+@mixin card {
+    .card {
+        // height: fit-content;
+        display: flex;
+        position: relative;
+        padding: 24px;
+        background-color: $save-text;
+        box-sizing: border-box;
+        width: fit-content;
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+
+            p {
+                padding-bottom: 21px;
+                font-size: $btns-size;
+            }
+
+            .btns {
+                display: flex;
+                align-items: center;
+                width: 100%;
+
+                button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: none;
+                    border-radius: 999px;
+                    padding: 6px 12px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    font-size: $btns-size;
+                    color: rgba(0, 0, 0, 0.74);
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    i {
+                        font-size: 20px;
+                        margin-right: 8px;
+                    }
+
+                    &:nth-child(1) {
+                        background-color: $config-bg;
+                    }
+
+                    &:nth-child(2) {
+                        margin-left: 12px;
+                        background-color: $connect-bg;
+                    }
+                }
+            }
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 100%;
+            background-color: $primary-color;
+            top: 0;
+            left: 0;
+        }
+    }
+}
+
+@mixin dropCard {
+    .dropCard {
+        position: relative;
+        width: 296px;
+        height: 156px;
+        padding: 32px;
+        background-color: $dropCard;
+        box-sizing: border-box;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 100%;
+            background-color: #aeaeae;
+            top: 0;
+            left: 0;
+        }
+
+        h2 {
+            color: #aeaeae;
+        }
+
+        @include card();
+
+        .card {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+}
+
+
+
+@mixin draggedCard {}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: $body-bg;
+    position: relative;
+    overflow: hidden;
+    .closeWrapper{
+        background: bisque;
+        padding: 6px;
+        border-radius: 50%;
+        display: none;
+        cursor: pointer;
+        position: absolute;
+        right: 32px;
+        bottom: 25%;
+        z-index: 1;
+    }
+
+    .app-root {
+        min-width: 100%;
+        height: 100vh;
+
+        header {
+            width: 100%;
+            height: 60px;
+            background-color: $primary-color;
+
+            nav {
+                width: 100%;
+                height: 100%;
+                padding: 0px 32px;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+
+                .logo {
+                    color: $save-text;
+                    font-size: $h1-size;
+                }
+            }
+        }
+
+        main {
+            height: calc(100vh - 60px);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            #wrapper {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow-y: scroll;
+                scroll-behavior: smooth;
+                
+                .cardContainer {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    @include dropCard();
+
+                    .dropCard {
+                        visibility: hidden;
+                        opacity: 0;
+
+                        .dotted {
+                            display: flex;
+                            position: absolute;
+                            width: fit-content;
+                            height: fit-content;
+                            opacity: 0;
+                            transition: all 0.3s ease;
+                        }
+
+                        .dotted-1 {
+                            left: 50%;
+                            bottom: -50%;
+
+                            .circle {
+                                width: 8px;
+                                height: 8px;
+                                background-color: #000;
+                                border-radius: 50%;
+                                position: absolute;
+                                top: 14px;
+                                left: -3px;
+                                transform: translateY(0px);
+                                animation: circle1 1s infinite ease;
+                            }
+
+                            .line {
+                                width: 1px;
+                                height: 75px;
+                                background-color: #000;
+                            }
+                        }
+
+                        .dotted-2 {
+                            left: -17%;
+                            top: 50%;
+
+                            .circle {
+                                width: 8px;
+                                height: 8px;
+                                background-color: #000;
+                                border-radius: 50%;
+                                position: absolute;
+                                left: 43px;
+                                top: -3.5px;
+                                animation: circle2 1s infinite ease;
+                            }
+
+                            .line {
+                                height: 1px;
+                                width: 60px;
+                                background-color: #000;
+                            }
+                        }
+
+                        .dotted-3 {
+                            left: 50%;
+                            top: -32%;
+
+                            .circle {
+                                height: 8px;
+                                width: 8px;
+                                background-color:#000;
+                                border-radius: 50%;
+                                position: absolute;
+                                bottom: 0px;
+                                left: -3px;
+                                animation: circle3 1s infinite ease;
+                            }
+
+                            .line {
+                                width: 1px;
+                                height: 51px;
+                                background-color: #000;
+                            }
+                        }
+
+                        .dotted-4 {
+                            right: -17%;
+                            top: 50%;
+
+                            .circle {
+                                width: 8px;
+                                height: 8px;
+                                background-color:#000;
+                                border-radius: 50%;
+                                transform: translateX(10px);
+                                position: absolute;
+                                top: -4px;
+                                animation: circle 1s infinite ease;
+                            }
+
+                            .line {
+                                height: 1px;
+                                width: 60px;
+                                background-color: #000;
+                            }
+                        }
+
+                        &.dragOver {
+                            border: 1px dashed $primary-color;
+                            background-color: rgba(33, 150, 243, 0.20);
+                        }
+                    }
+
+                    .middleCards {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                         justify-content: center;
+                        align-items: center;
+                        // .dropCard{
+                        //     &:nth-child(1){
+                        //         position: absolute;
+                        //         top: 20%;
+                        //         left: 17.5%;
+                        //     }
+                        //     &:nth-child(3) {
+                        //         position: absolute;
+                        //         top: 20%;
+                        //         right: 17.5%;
+                        //     }
+                        // }
+                        .dropCard{
+                            visibility: hidden;
+                        }
+                        @include dropCard();
+                        @include card();
+
+                        .card {
+                            margin:auto;
+                            margin: 50px 50px;
+                        }
+                    }
+                }
+            }
+
+            aside {
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 0;
+                height: calc(100vh - 60px);
+                overflow: hidden;
+                background-color: $save-text;
+                box-shadow: -2px 0 12px 0 rgba(0, 0, 0, 0.12);
+                transition: width 0.3s ease;
+
+                .container {
+                    padding-left: 32px;
+                    padding-top: 32px;
+
+                    h1 {
+                        font-size: $h1-size;
+                        font-weight: $config-weight;
+                        color: rgba(0, 0, 0, 0.74);
+                        padding-bottom: 32px;
+                    }
+
+                    form {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+
+                        .form {
+                            width: 420px;
+                            height: 44px;
+                            position: relative;
+
+                            input {
+                                width: 100%;
+                                height: 100%;
+                                padding-top: 15px;
+                                padding-left: 12px;
+                                font-size: 14px;
+                                box-sizing: border-box;
+                                color: #595f6e;
+                                outline: none;
+                                background: $save-text;
+                                border: solid 1px rgba(0, 0, 0, 0.32);
+                                border-radius: 4px;
+
+                                &:focus {
+                                    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+                                    background: #fff;
+                                    border: 1px solid $primary-color;
+                                }
+
+                                &:focus+.label-content .content-name,
+                                &:valid+.label-content .content-name {
+                                    transform: translateY(-30px);
+                                    font-size: 12px;
+                                    bottom: 9px;
+                                    background: $save-text;
+                                    padding: 0px 4px;
+                                }
+                            }
+
+                            .label-content {
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                left: 0px;
+                                bottom: 0px;
+                                pointer-events: none;
+                                box-sizing: border-box;
+
+                                .content-name {
+                                    position: absolute;
+                                    bottom: 12px;
+                                    left: 12px;
+                                    font-size: $config-size;
+                                    transform: translateY(0px);
+                                    transition: all 0.3s ease;
+                                    font-family: sans-serif;
+                                }
+
+                            }
+
+                            &input:focus+.label-content::after,
+                            &input:valid+.label-content::after {
+                                transform: translateX(0%);
+                            }
+
+                            &:nth-child(1) {
+                                margin-bottom: 32px;
+                            }
+
+                            &:nth-child(2) {
+                                margin-bottom: 38px;
+                            }
+
+                        }
+
+                        .labeled {
+                            position: relative;
+                            padding-left: 40px;
+                            cursor: pointer;
+                            color: rgba(0, 0, 0, 0.74);
+                            padding-bottom: 43px;
+                            display: flex;
+                            align-items: center;
+
+                            input[type="checkbox"] {
+                                display: none;
+
+                                &[type="checkbox"]:checked+.check-content::after {
+                                    animation-name: checkMark;
+                                    animation-duration: 0.1s;
+                                    transition: all ease-in;
+                                    opacity: 1;
+                                    border-color: $save-text;
+                                }
+
+                                &[type="checkbox"]:checked+.check-content::before {
+                                    animation-name: check;
+                                    animation-duration: 0.1s;
+                                    transition: all ease-in;
+                                    background: $primary-color;
+                                    border: 2px solid $primary-color;
+                                }
+
+                                &[type="checkbox"]:checked+.labeled {
+                                    color: #000;
+                                }
+                            }
+
+                            .check-content {
+                                position: relative;
+                                font-size: $config-size;
+                                color: rgba(0, 0, 0, 0.74);
+
+                                &::before {
+                                    content: "";
+                                    position: absolute;
+                                    width: 18px;
+                                    height: 18px;
+                                    border: 2px solid rgba(0, 0, 0, 0.5);
+                                    border-radius: 4px;
+                                    left: -35px;
+                                    bottom: -2px;
+                                }
+
+                                &::after {
+                                    content: "";
+                                    position: absolute;
+                                    left: -35px;
+                                    top: 15%;
+                                    width: 10px;
+                                    height: 4px;
+                                    border-left: 1.5px solid #000;
+                                    border-bottom: 1.5px solid #000;
+                                    transform: translate(50%, 50%) rotate(-45deg);
+                                    opacity: 0;
+
+                                }
+                            }
+                        }
+
+                        .formBtns {
+                            display: flex;
+
+                            button {
+                                font-size: $config-size;
+                                border: none;
+                                padding: 12px 32px;
+                                border-radius: 4px;
+                                cursor: pointer;
+
+                                &:nth-child(1) {
+                                    margin-right: 8px;
+                                    background-color: #f1f1f1;
+                                    color: rgba(0, 0, 0, 0.32);
+                                    font-weight: $config-weight;
+                                }
+
+                                &:nth-child(2) {
+                                    background-color: $primary-color;
+                                    color: $save-text;
+                                    font-weight: $config-weight;
+                                }
+
+                                &:focus {
+                                    outline: none;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            .more-cards {
+                position: absolute;
+                width: 100%;
+                bottom: -201px;
+                overflow: hidden;
+                box-shadow: 0 -2px 12px 0 rgba(0, 0, 0, 0.12);
+                background-color: #fafafa;
+                display: flex;
+                align-items: center;
+                height: 201px;
+                transition: all 0.3s ease;
+
+                &.toggleHeight {
+                    bottom: 0px;
+                }
+
+                .card-wrapper {
+                    padding: 20px 24px;
+                    position: relative;
+                    width: 100%;
+
+                    .card-container {
+                        display: flex;
+                        align-items: center;
+                        @include card();
+
+                        .card {
+                            transform: scale(1);
+                            margin-right: 20px;
+                            cursor: pointer;
+                        }
+
+                        &:last-child {
+                            padding-right: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@keyframes circle3{
+ 0%{
+     opacity: 1;;
+ }   
+ 100%{
+     opacity: 0;
+     transform: translateY(-43px);
+ }
+}
+
+@keyframes circle2{
+    0%{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    100%{
+        opacity: 0;
+        transform: translateX(-43px);
+    }
+}
+@keyframes circle1{
+    0%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(43px);
+    }
+}
+@keyframes circle{
+    0%{
+        opacity: 1;
+        transform: translateX(10px);
+    }
+
+    100%{
+        opacity: 0;
+        transform: translateX(53px);
+    }
+}
+
+@keyframes check {
+    0% {
+        transform: scale(0);
+    }
+
+    90% {
+        transform: scale(1.4);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes checkMark {
+    0% {
+        transform: translate(50%, 50%) scale(0) rotate(-45deg);
+        opacity: 0;
+    }
+
+    90% {
+        transform: translate(50%, 50%) scale(1.3) rotate(-45deg);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(50%, 50%) scale(1) rotate(-45deg);
+        opacity: 1;
+    }
+}

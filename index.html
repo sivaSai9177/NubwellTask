@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>dashboard Application</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+</head>
+<body>
+    <div class="closeWrapper" id="bug">
+        <i class="material-icons">close</i>
+    </div>
+    <div class="app-root">
+        <header>
+            <nav>
+                <div class="logo">logo</div>
+            </nav>
+        </header>
+        <main>
+           <div id="wrapper">
+                <div class="cardContainer">
+                    <div class="dropCard">
+                        <div class="dotted-1 dotted">
+                            <div class="circle"></div>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                    <div class="middleCards">
+                        <div class="dropCard">
+                            <div class="dotted-4 dotted">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <h2>Nubewell-NFG</h2>
+                                <p>ID: <span id="id-num">01</span> </p>
+                                <div class="btns">
+                                    <button class="config"><i class="material-icons">settings</i>Config</button>
+                                    <button class="connect"><i
+                                            class="material-icons">swap_horizontal_circle</i>Connect</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropCard">
+                            <div class="dotted-2 dotted">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropCard">
+                        <div class="dotted-3 dotted">
+                            <div class="circle"></div>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+            <aside>
+                <div class="container">
+                    <h1>Configuration</h1>
+                    <form autocomplete="off"> 
+                        <div class="form">
+                            <input type="text" required />
+                            <label class="label-content">
+                                <span class="content-name">Config Name</span>
+                            </label>
+                        </div>
+                        <div class="form">
+                            <input type="text" required />
+                            <label class="label-content">
+                                <span class="content-name">Config property</span>
+                            </label>
+                        </div>
+                        <label class="labeled">
+                            <input type="checkbox" name="check">
+                            <span class="check-content">Enable me</span>
+                        </label>
+                        <div class="formBtns">
+                            <button id="cancel">cancel</button>
+                            <button id="save">save</button>
+                        </div>
+                    </form>
+                </div>
+            </aside>
+            <div class="more-cards">
+                <div class="card-wrapper">
+                    <div class="card-container">
+                        <div class="card" draggable="true" id="card">
+                            <div class="card-content">
+                                <h2>Nubewell-NFG</h2>
+                                <p>ID: <span id="id-num">01</span> </p>
+                                <div class="btns">
+                                    <button class="config"><i class="material-icons">settings</i>Config</button>
+                                    <button class="connect"><i
+                                            class="material-icons">swap_horizontal_circle</i>Connect</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" draggable="true">
+                            <div class="card-content">
+                                <h2>Nubewell-NFG</h2>
+                                <p>ID: <span id="id-num">01</span> </p>
+                                <div class="btns">
+                                    <button class="config"><i class="material-icons">settings</i>Config</button>
+                                    <button class="connect"><i
+                                            class="material-icons">swap_horizontal_circle</i>Connect</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" draggable="true">
+                            <div class="card-content">
+                                <h2>Nubewell-NFG</h2>
+                                <p>ID: <span id="id-num">01</span> </p>
+                                <div class="btns">
+                                    <button class="config"><i class="material-icons">settings</i>Config</button>
+                                    <button class="connect"><i
+                                            class="material-icons">swap_horizontal_circle</i>Connect</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" draggable="true">
+                            <div class="card-content">
+                                <h2>Nubewell-NFG</h2>
+                                <p>ID: <span id="id-num">01</span> </p>
+                                <div class="btns">
+                                    <button class="config"><i class="material-icons">settings</i>Config</button>
+                                    <button class="connect"><i
+                                            class="material-icons">swap_horizontal_circle</i>Connect</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
