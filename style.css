@@ -85,8 +85,6 @@ body .app-root main #wrapper {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
   position: relative;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
 }
 
 body .app-root main #wrapper .cardContainer {
